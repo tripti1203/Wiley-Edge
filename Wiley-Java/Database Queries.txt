@@ -1,0 +1,233 @@
+//Create a sample view ---->
+
+CREATE OR REPLACE VIEW vwEmpDept40
+AS
+SELECT empID,empName,empSalary,managerId,
+empSalary*12 AnnualSalary,deptID
+FROM employees
+WHERE deptID = 40;
+
+//DML operations on base table and view --------->
+
+insert into vvEmpDept40 values(115,'Sakshi',23000,40);
+
+insert into employees values(116,'Kishan',41000,'kishan@gmail.com',NULL,CURRENT_DATE,40);
+
+insert into vvEmpDept40 values(117,'Hitesh',23000,30);
+
+insert into employees values(118,'Chetan',41000,'chetan@gmail.com',NULL,CURRENT_DATE,20);
+
+DELETE FROM employees WHERE empID = 116;
+DELETE FROM vvEmpDept40 WHERE empId = 115;
+
+UPDATE emp1oyees
+SET empSalary = 52000 
+WHERE empId = 109;
+
+UPDATE vwEmpDept40 
+SET empSalary = 45000 
+WHERE empId = 109;
+
+UPDATE vwEmpDept40 
+SET empSalary = 6000 
+WHERE empId = 105;
+
+//Complex view using join ----->
+
+CREATE OR REPLACE VIEW vwEmpDeptRelation
+AS
+SELECT e.empID,e.empName,d.deptId,d.deptName
+FROM employees e JOIN departments d
+WHERE e.deptID = d.deptID;
+
+Insert INTO vwEmpDeptRelation values(
+	119,
+	'Tripti',
+	20,
+	'Development'
+);
+
+//Create View with explicit columns --------->
+
+CREATE OR REPLACE VIEW vwEmpDept20
+(eId,eName,dID)
+AS
+SELECT empId,empName,deptId
+FROM employees
+WHERE deptID = 20;
+
+SELECT * FROM vwEmpDept20;
+Select * from employees;
+
+Insert INTO vwEmpDept20 VALUES(502,'Ankur',20);
+
+//SHOW VIEW/BASE TABLES COMMANDS ------> 
+
+	SHOW TABLES;
+	
+	SHOW FULL TABLES;
+	
+	SHOW FULL TABLES
+	WHERE table_type = 'VIEW';
+	
+	SHOW FULL TABLES
+	IN sampledb1
+	WHERE table_type = 'BASE TABLE';
+	
+	SHOW FULL TABLES
+	FROM sampledb1
+	WHERE table_type = 'BASE TABLE';
+	
+	SHOW FULL TABLES
+	IN sys
+	WHERE table_type = 'VIEW';
+	
+	SHOW FULL TABLES
+	IN sys
+	LIKE '%schema%'
+	
+	SELECT * FROM information_schema.tables;
+	
+	SHOW DATABASES;
+	
+	SELECT table_name,table_schema
+	FROM information_schema.tables
+	WHERE table_schema LIKE '%sample%';
+	
+//DROP VIEW COMMANDS --------->
+
+	DROP VIEW vwempdeptrelation;
+	
+//RENAME VIEW COMMANDS ---------->
+	
+	RENAME TABLE vwempdept20 TO vw20;
+	
+//SUBQUERY OR NESTED QUERY ------------->
+
+Q. Update salary of roeger as that of the salary of king
+
+SELECT empSalary
+FROM employees
+WHERE empName = 'King';
+
+UPDATE employees
+SET empSalary = 10000
+WHERE empName= 'Roger';
+
+UPDATE employees
+SET empSalary = (SELECT empSalary FROM employees WHERE empName = 'King')
+WHERE empName = 'Roger';
+
+
+Q. Fetch list of employee workingunder dept sales.
+
+SELECT deptID
+FROM departments
+WHERE deptName = 'Sales';
+
+SELECT * FROM Employees
+WHERE deptId = 10;
+
+SELECT * FROM Employees
+WHERE deptId = (SELECT deptId FROM departments WHERE deptName = 'Sales';
+
+Q. List all suppliers with the number of products they offer.
+
+SELECT CompanyName,
+(SELECT count(*) FROM product p WHERE p.supplierId = s.ID) ProductCount
+FROM supplier s;
+
+Q. list products with order quantities greater than 60
+
+SELECT productName
+FROM product
+WHERE id IN (SELECT productID FROM orderItem WHERE quantity > 60);
+
+Q. List all customers with their total number of orders.
+
+SELECT firstname, lastname,
+(SELECT count(*) FROM `order` o WHERE o.customerid = c.id ) Ordercount
+FROM customer c
+GROUP BY c.id ; 
+
+//IN,BETWEEN,ANY,ALL ------------>
+
+SELECT Id , productName
+FROM product
+WHERE id = ANY(SELECT productID FROM orderItem WHERE unitprice > 100);
+
+SELECT Id , productName
+FROM product
+WHERE id IN (SELECT productID FROM orderItem WHERE unitprice > 100);
+
+SELECT Id , productName
+FROM product
+WHERE id > ALL (SELECT productID FROM orderItem WHERE unitprice > 100);
+
+Q.List of the prodcut that have were sold by quantity 1.
+
+SELECT Id , productName
+FROM product
+WHERE id = ANY (SELECT productID FROM orderItem WHERE quantity = 1);
+
+Q. List the customer who placed orders that are larger than the average of each customer order.
+
+(SELECT AVG(TotalAmount)
+FROM `order`
+GROUP BY customerId;)  <----------subquery
+
+SELECT firstname,o.id,o.totalamount
+FROM customer c JOIN `order` o
+ON c.id = o.customerId
+AND o.totalamount > ALL (
+SELECT AVG(TotalAmount)
+FROM `order`
+GROUP BY customerId); 
+
+
+//UNION Command ---------------->
+
+Q. List the contact the deatils of customer and suppliers, sorted by country.
+SELECT Firstname,City,Country,phone
+FROM customer
+UNION
+SELECT contactname,city,country,phone
+FROM Supplier
+ORDER BY country asc;
+
+Q. List the contact the deatils of customer and suppliers, sorted by country,consider if any supplier is customer.
+
+SELECT Firstname,City,Country,phone
+FROM customer
+UNION ALL
+SELECT contactname,city,country,phone
+FROM Supplier
+ORDER BY country asc;
+
+SELECT CONCAT(Firstname,' ', LastName),City,Country,phone,'Customer' AS ENTITY
+FROM customer
+UNION ALL
+SELECT contactname,city,country,phone,'Supplier' AS ENTITY
+FROM Supplier
+ORDER BY country asc;
+
+
+Q. List all the countries for customer and suppliers,including duplicates.
+
+SELECT COUNTRY 
+FROM Customer
+union all
+select country 
+FROM supplier;
+
+Q. List all customers who are from Germany and Mexico column wise.
+	
+	SELECT Firstname,LastName
+	FROM Customer
+	WHERE country IN ('Germany','Mexico');
+
+Q. 
+
+	SELECT DISTINCT Firstname
+	FROM customer INNER JOIN supplier
+	USING (id);

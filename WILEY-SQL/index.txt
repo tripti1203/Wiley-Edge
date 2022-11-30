@@ -1,0 +1,30 @@
+INDEX :
+
+show table status where name = 'index_demo';
+
+why do we use engine while creating index????
+what way indexes are stored ?? --> B-Trees
+
+EXPLAIN Command - it gives what is the plan of the query engine to execute the query.
+
+TABLE STATUS COLUMNS : 
+
+--Non-unique -> if value = 0 means unique index and if value = 1 non-unique index.
+
+COMPOSITE INDEXING :
+
+--CREATE INDEX secondary_indx on myTable(data);
+--CREATE INDEX composite_idx on myTable(id,data);
+
+PARTIAL INDEXING :
+
+--CREATE INDEX partial_idx on myTable(data(2)); ---> First two data index will be created that is the partial index will be created.
+
+
+bottlenecks
+
+topics - joins&views,indexes,stored procedure,triggers,jdbc  <--- this week
+
+Query optimization is the overall process of choosing the most efficient means of executing a SQL statement.
+used for accessing the database in an efficient manner.
+These can include rewriting the query, determining the order in which it will read tables, choosing which indexes to use, and so on.

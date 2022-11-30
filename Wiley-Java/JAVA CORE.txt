@@ -1,0 +1,733 @@
+Class -->
+
+	- A user defined datatype or blueprint
+	
+	- A class is a collection of data members and member functions.
+
+Object -->
+
+	- A representator or a part of a class.
+	
+	- Helps in accessing the members of a class.
+	
+	- When an object of a class is created , memory get allocated to all the data members of a class but member function get
+
+Constructor -->
+
+	- Helps in initialising data members.
+
+	-If we dont have constructor in a class , then all the data members get initialised by their default value with respect to their types by a constructor of an object class.
+
+	-But if you have any constructor in your own class, object class constructor doesn't invoke.
+
+POLYMORPHISM -->
+
+	-Poly means many and morpho means forms.
+
+	-"One interface multiple function"
+
+	- Polymorphism can be achieve by two eays:
+
+	1. Static Polymorphism (Early Binding) :-
+		- Overloading (Method and Constructor Overloading)
+
+		- Ways to use function parameters : 
+			1. Number of parameters.
+			2. Type of parameters
+			3. Sequence of parameters.
+
+	2. Dynamic Polymorphism (Late-Binding) :-
+
+		- Overriding (Abstract classes and Interfaces)
+		
+		-If a child class has method with same name , same signature and same or obove access specifier to re-write the function defination, known as overriding.
+
+
+ENCAPSULATION -->
+
+Getters and Setters :
+
+	-Getters and setters are special methods.
+	
+	-They help in reading and writing the data members or object property.
+	
+	-The getter is to read a varirable.
+	
+	-The setter is to write to a variable
+	
+	-They help in reading and writing the private fields.
+	
+	-They helps in making the property read-only , write-only, read&write-only
+	
+	-They also help in checking with different 
+
+Data Types in Java:
+
+	-Primitive: 
+		Integer:- byte,short,int,long
+		Floating-Point:- float,double
+		Character:- char
+		Boolean:- boolean
+
+	-Non Primitive:
+		String
+		Array
+		List
+		Stack
+		Vector
+		User-Defined Dataypes
+		Class
+
+Wrapper Classes In Java:
+
+	-Each Primitive types has dedicated wrapper class.
+	
+	-Generic classes works with object. 
+	
+	-wrapper classes are needed to convert primitive to non-primitive dataype or objects.	
+	
+	-In Java, wrapper classes are provided by java.lang package.
+	
+	int	    Integer
+	char    Character
+	byte	Byte
+	long	Long
+	short	Short
+	float	Float
+	double	Double
+	boolean	Boolean
+	
+Abstraction -->
+	
+Abstract Class : 
+
+	- A class in which abstract methods are defined, needs to be declare abstract class.
+	
+	- We use abstract keyword to make a class an abstract.
+	
+	- An abstract can consist of abstract and non-abstract methods.
+	
+	- An abstract class can't be instantiated.
+	
+	- Abstract class can also have constructor,default and static method also.
+	
+	- An abstract can also have final variables and methods.
+
+Abstract methods:
+
+	- A methods which is declared as abstract and doesn't have implementation is known as abtract method.
+	
+	- An abstract methods get overriden into subclasses or child classes forcefully.
+	
+	- An abstract class can extend another abstract class.
+	
+	- While overriding the method access modifier of the method should be same.
+
+Interface -->
+
+	- An interface are contract.
+	
+	- It is a blue print of a class that can have static, default and abstract method.
+	
+	- There can be only abstract methods in interfaces.
+	
+	- By default all the methods of an interface are abstract and public.
+	
+	- Java 8 onwards we can have default and static methods in an interface.
+	
+	- Java 9 onwards we can also have private methods in an interface.
+	
+	- A class extends another class but the class implements the interface.
+	
+	- Multiple inheritance can be achieved with the help of interface. 
+	
+	- Thus, a class can implement more than one interface also.
+
+Exception Handling -->
+
+There are some errors being raised by compiler or interpreter at the compile time or runtime depending upon the coding approach a developer follows.
+
+There are types of errors:
+	
+	-Compile Time Errors : Caught by compiler while writing a program.Two types of compile time error :- 
+		
+		-Syntactical error(Missing semicolon,mis-spelled keywords)
+        
+		-Semantic Error(ExpressionalError).
+
+    NOTE: Programmers need to handle or resolve the compile time error & logical errors by themseleves.
+
+	-Runtime Errors:  * These error gets occurs due to incorrect input or invalid input.
+					  *	They are occurred at execution time.Thus, they are also known as Exceptions.
+					  *	They can be resolved with the help of exception handling.
+					  *	The programs get abnormally terminated once exception occurs.
+
+	-Logical Errors:  * These error gets occurs when we dont get an expected output.
+					  *	These are the errors raised by developers intentionally or non-intentionally.
+					  *	They are due to un
+
+
+Throw: It is a keyword which helps in throwing the built in exception or custom exception manually.
+Throws: It is a keyword that helps to recognize checked exception.It is used with method as a signature. 
+
+NOTE: When we use override method throws declaration doesn't works.
+
+File Handling -->
+
+	-It helps in storing the data into the file system.
+
+	-Java offers a list of classes and methods to work with file system.
+
+	-All these classes are available within java.io package.
+
+	-Working with file handling is working with streams.
+
+	-Stream is group of data or characters that travels from source to destination and vice versa.
+
+	-Java has two types of streams 
+		
+		-Byte Streams = Input stream class and output stream class.
+		
+		-Character Streams = Reader class and writer class
+
+	NOTE : The Byte streams writes the data into file character-wise based upon unicode encoding that is 16 bits at a time.Thus, this is a much quicker technique as compared to byte stream.
+
+Input Classes -->
+
+Three ways to take input from console in java - 
+	
+	- Using java buffered reader 
+	
+	- Using java scanner class
+	
+	- Uisng java console class
+
+
+String Tokenizer : 
+
+	-String tokenizer class comes inside java.util.package
+	
+	-This class helps in breaking a string into tokens
+
+
+Strings :
+
+* When we create using "" (String str = "abc";) ---->
+
+	- String is immutable in Java.
+
+	- When we declare a String using double quotes, JVM first looks for the string with the same value in a String pool.
+
+	- If found it returns the reference of the same object from the pool.
+
+	- Otherwise it creates a String object in the string pool and return the reference.
+
+	- Thus, JVM saves the memory by using the same strings in different threads.
+
+* When we create a string using new operator (String str = new String("abc");) ------->
+
+	- It create String in heaps memory.
+
+* String class overrides two methods 
+	
+	- equals() method :
+
+		=> this methods check case-sensitive strings.
+		
+		=> checks if two strings have same sequence.
+		
+		=> string uses UTF-16(Unicode) thus, each character contains 2 	bytes
+
+	- hashCode() method
+
+NOTE: Use equalIgnoreCase() if you are looking for case-insensitive strings.
+
+As Strings is immutable, whenever we do any String manipulation, it generates new String and discards the older one for Garbage Collection.Thus,it generates a lot of garbage in heap so we prefer to user String Builder and Buffer for doin String manipulation,because these classes are mutable.This classes provide methods like append(),insert(),delete() and so on.
+
+NOTE: Mutable then multithreaded environment.
+      builder in multiThreaded , string and buffer in single thread
+
+Collection & Generics -->
+	
+COLLECTION (Interface) :- 
+
+	*Collection is just a framework in java that provides different interfaces and 	classes to store and manipulate objects.
+
+	- SET   = SortedList(Interface) --> TreeSet Class ,HashSet & LinkedHashSet (Classes)
+	
+	- LIST  = Arraylist , LinkedList , Vector (Classes)
+	
+	- QUEUE = PriorityQueue and LinkedList (Classes)
+	
+Flow Chart Of Collection Framework: 
+
+
+	COLLECTION FRAMEWORK - 
+		
+	:: It has two main root interfaces 	
+
+		---> Collection (java.util.Collection)
+
+		---> Map (java.util.Map)
+
+	
+
+OBJECTS IN COLLECTIONS :
+ 
+	- Arrays :	--Utility class that contains various static method that we can use to perform operation such as find, sort, search and so on.
+
+	- Collections:	--Utility class that provides methods for useful operation for handling large data.
+
+			-- Class that consists of all static method that operate or return collections after certain operations.
+
+
+ARRAYLIST CLASS :
+
+	-This class allows duplicate values.
+	
+	-Elements can be accessed using index or element value.
+	
+	-We can also use iterator or list iterator to access the elements.
+	
+	-Elements in arraylist can grow and sink dynamically.
+
+LINKELIST CLASS : 
+
+	-Linked List implements list and queue interface.
+	
+	-This maintains the insertion order similar to arrayList.
+	
+	-By default, collections internally doubly-linked list.
+	
+	-This list contains duplicate elements also.
+	
+	-The elements can be searched in bi-directionally.
+	
+	-The elements can be added from both side, as it is doubly-linkedlist.
+
+VECTOR : 
+
+	-It is almost similar to arrarList.
+	
+	-Vector is synchronized.
+	
+	-Vector maintains the insertion order.
+	
+	-It also allows duplicate values.
+
+SET : 
+
+	-Set is an interface that extend the collections.
+	
+	-A set is an unordered collection of object.
+	
+	-No duplicates are allowed in the set.
+	
+	-HashSet,LinkedHashSet & Treeset.
+	
+	-All basic operation like add, remove , size and clear are available in set interface.
+
+LinkedHashSet : 
+
+	-Implemetation of set interface.
+	
+	-Only contains unique elements.
+	
+	-Does not allow duplicate.
+	
+	-Maintains the insertion order.
+	
+	-Also allows null values but no duplicates of it.
+	
+	-It is non-synchronized.
+
+TreeSet : 
+
+	-Provides the implementation of sortedSetInterface that extends set interface.
+	
+	-Uses tree data structured for the storage.
+	
+	-Object are sorted in ascending order.
+	
+	-Because elements are sorted access and retrieval is fast in this set.
+	
+	-Doesn;t allow null values
+	
+------------------------------------------------------------------------------------------------------------------|
+Assignments :-                                                                                                    |
+Make Employee class-->empid , name																	              |
+override compareTo method comparable interface																	  |
+main --> treeset emp elements print.                                                                              |
+Home assigment --> make arraylist read-only in java (hint-collections utility--> unmodifiable collections)        |
+------------------------------------------------------------------------------------------------------------------|
+
+Unmodifiable List Method in Collections Class:
+
+	-Unmodifiable methods in collections class is used to return an unmodifiable view of a specified list.
+	
+	-It allows users with read-only access to internal lists.
+	
+	-Any attempts of modification in the list created using unmodifiableList() whether direct or via iterator result in an UnsupportedOperationException.
+	
+	-Syntax :: List<ObjectDataypes> obj = Collections.unmodifiableList(specifiedList);
+	
+	-The returned list will be serializable if the specified list is serializable.
+	
+	-Similarly, the returned list will implement RandomAccess if the specified list does.
+	
+QUEUE Interface : 
+
+	Collections Interface -> Queue (Interface) --> Priority Queue Class 
+							 Queue (Interface) -> Deque (Interface) --> LinkedList class , ArrayDeque class.
+							 
+	-Ordered list of object.
+	
+	-Uses First-In-First-Out principle for insertion and deletion of elements. 
+
+Priority Queue : 
+
+	-Every elements has its own priority value.
+	
+	-Insertion is done based on priority, hence the queued elements can either be ascending or decending.
+	
+	-Hihghest priority value element gets dequeued first that the lowest priority element.
+	
+
+
+NOTE : There are two interfaces to implement map --> Map Interface & Sorted Map interface.
+	
+Map Interface : 
+
+	-It is an interface which allows to store data in key-value pair.
+	
+	-As it is different from rest of the collections interfaces,hence it is not a subtype of collections.
+	
+	-Map is implemented by abstract-map which defines all the basic functionality.
+	
+	-AbstractMap is furthur extended by various classes like :- hashmap,linkedhashmap,treemap
+	
+Sorted Map Interface :
+
+	-Sorted Map interface extends Map interface.
+	
+	-It provides ordering of its elements.
+	
+	-Null key as well as null values are not allowed.
+	
+Navigable Map Interface :
+
+	-It has different methods to iterate over a elements in the map.
+	-It is used to arrange the elements in order.
+	-It extends sorted map.
+	
+HashMap : 
+
+	Map(Interface) --> HashMap (Class)
+
+	-HashMap is a hash table based upon map interface.
+	
+	-Map helps to store data in key-value pair.
+	
+	-It cannot contain duplicate keys.
+	
+	-It only allows one null key and multiple null values.
+	
+	-It is an unordered collection.
+	
+	-It is not thread safe.
+------------------------------------------------------------------
+emp class --> id,name,salary                                      |
+added --> constructors(both) , getter & setters , toString        |
+main --> map and instantiate using parameterized constructor.	  |
+------------------------------------------------------------------
+LinkedHashMap : 
+
+	MAP(Interface) --> HashMap (Class) -> LinkedHashMap (Class)
+
+	-It is same as hashmap but it maintains the insertion order of the elements.
+	
+	-It provides the linkedlist implementation of map interface.
+	
+	-It extends the hashmap class to store its entries in the hashtable.
+	
+	-It internally maintains doubly-linkedlist for insertion.
+
+TreeMap : 
+
+		MAP(Interface) -> Sorted Map(Interface) -> Navigable Map(Interface) --> TreeMap (Class)
+
+	-It implements navigable map that extends sorted map which extends map interface.
+	
+	-It maintains the natural ordering of elements.
+	
+	-Integer elements will be sorted in numerical order and string elements will be sorted in alphabetical order.
+	
+
+EQUALS & HASHCODE Method :
+
+	-These methods have been defined in object class.
+	
+	-All the java objects inherit these methods but its upto the users to use these methods.
+	
+	EQUALS METHOD :-
+		
+		-This verifies the equality of two objects.
+	
+		-This method checks whether two object references of same class are equal or not.
+		
+		TIP: By default two objects are equal if they refer to same memory location.
+		
+	HASHCODE METHOD :-
+	
+		-If we override equals() then we must override hashcode().
+		
+	Conclusion: e1.equals(e2) then e1.hashCode()==e2.hashCode() should always be true.
+				but e1.hashCode() == e2.hashCode() is true it doesn't mean that e1.equals(e2)
+				
+HASHING : 
+
+	- Hashing is process which is done to find the index from the key to store the objects in the respective bucket.
+	- Hashcode() methods does hashing internally.
+
+GENERICS :- 
+
+	-It was introduced from Java5 onwards.
+	
+	-The generic collections allow the datatype to pass as a parameter to the classes and medthods.
+	
+	-The generic collection disable the type-casting usage uneccessary.
+	
+	-The generic collections are type safe and checked at compile time.
+	
+	-The generic collection syntax :: class<data-type>,interface<data-type>.
+	
+	-Elements to be used while creating user-defined generics
+		-T-Type
+		-E-Elements
+		-K-Key
+		-N-Number
+		-U-
+		
+				
+FINAL KEYWORD : 
+
+	-Final keyword can be used with :-
+		--Variable :  
+		
+			1)Final Variable : Once declared cannot be changed in any class , methods.
+	        
+			2)Blank Final Variable : If the value is not been initialized at the time of the declaration it can only be initialized in the constrcutor 
+									 not in any methods or any class.
+            
+			3)Static Final Variable : If the value is not initialized during the declaration then it can only be in initialised in the static block.
+			
+		--Method : Methods that is declared final cannot be overriden by any sub classes.
+		
+		--Class : Classes that is declared final cannot be inherited by any other classes.
+
+
+What is Cloning ?  :
+
+	-Clonning is a process for creating an exact copy of existing object in the memory.
+	
+	-It implements cloneable interface.
+	
+	-In Java, Clone()method of beign used from java.lang.Object class.
+	
+	-This clone method copies the object in which field-by-field assignments happens 
+	 and returns the reference of the copied object.
+	
+	-The object in which we implement cloneable interface is eligible for cloning process.
+	
+	-By default clone() method creates a shallow copy of an object.
+	
+	-To implemet deep copy of an object, we need to override clone() method in respective class.
+
+
+SHALLOW COPY :
+
+	-The default version of clone() metjod is shallow copy.
+	
+	-The shallow copy of an object will have exact copy of all the fields.
+	
+	-If the original object has any references to another object bas fields,then only-references 
+	 of those objects are being copied on the clone object.
+	
+	-Thus, any changes happens to the original object will make affect to copied object and vice-versa.
+
+	
+DEEP COPY : 
+
+	-Deep copy of an object will have exact copy of all the fields,
+	but if original object has any reference to another objects as fields,
+	then the copy of those objects are also cretaed using clone() method on them.
+	
+	-Thus, Deep copy is 100% disjoint independent of each other.
+	
+Singleton Class : 
+
+	-A singleton class can have only one object of that class at a time.
+	
+	-After the first time, if we try to instantiate the singleton class, the new variable also 
+	points to the first instance of the class.
+	
+	-Ways to create a class singleton :-
+	
+		-Make a constructor private.
+		
+		-Create a static method that has return type as Object of the same class.
+
+	-Reason for singleton class -> It limits the objects to be created.
+	
+Case-Study :
+
+	-In multi-Threading environment two instances are trying to call getIntance.
+	But, as its singleton class only one one instance can be created.
+	
+	-To make the creation of Singleton object as thread-safe, the method getInstance()
+	should be synchronized.So that the method gets executed  only one thread at a time.
+	
+Inner-Classes : 
+
+	-A non-static nested class,
+
+	-This class can have access to members of the outer class.
+
+	-As the class is inner or nested, inside the another class,You
+	must intantiate or create the object of outer class first.
+	
+MultiThreading :
+
+	-Multithreading is a process to create multiple threads at the same time without
+	dependency of other threads.
+	
+		-A process to create multiple threads.
+
+		-At the same time.
+
+		-Without dependency.
+		
+NOTE: Whichever thread gets ready first will be executed first.
+
+Synchronous(Blocking) Vs. Asynchronous(Non-Blocking) Programming Approach : 
+
+Non-Blocking:-
+
+	-One or more request can be placed one after the another but each request independently 
+	gets allocated with thread.
+
+	-Once your request is processed, you will get your output.
+	
+NOTE: Not sure which request gets processed first that depends upon request time and resources
+required.
+
+Blocking:-
+
+	-Request gets happended one after the another until the previous request is not 
+	completed,next has to wait.
+
+	-One request at a time.
+	
+Thread :
+
+	-A thread is a pre-defined class which is available in java.lang package.
+
+	-It ia a unit of CPU and it is actually known for independent execution.
+	
+To create your own thread or preocessing request : -
+
+	1. By extending thread class.
+
+	2. By implementing runnable interface.
+	
+	-->Main method is itself a thread, whenever program executes JVM looks for main thread to execute main method.
+	
+----------------------------------------------------------------------------------------------------------------------------------------------|
+ASSESMENT : thread1 , thread2 class extends thread override run method --> main start both thread class and main thread.                      |
+
+	-While using runnable interface we need to create object of thread class first then pass the Thread-defined class object in it to start   |
+	the thread.
+----------------------------------------------------------------------------------------------------------------------------------------------|
+	
+Which is better to use extending thread or implementing runnable ? 
+
+--> Runnable is recommended because once we extend the thread class then we cannot extend that class to any other class,hence no inheritance can be created.
+But if we implement runnable interface other classes can extend the thread class.
+
+--> Another reason to use runnable interface is it share same object to multiple threads.
+while extending thread it uses unique object for multiple threads. 
+
+
+Thread Life Cycle : 
+
+	1. New Thread -  When thread gets created it is called new thread.
+	
+	2. Runnable - When thread is created it goes to runnable state when thread scheduler is not assigned.
+	
+	3. Running - When the thread starts it goes to running state.
+	
+	4. Blocked (Non- Runnable) - 
+	
+	5. Terminated (Dead) - Either the execution completed or error occured thread gets terminated.
+	
+YIELD Method in Thread: 
+
+	--> A yield() method is a static method of Thread class and it can stop the currently executing thread and will give a chance to other waiting threads of the same priority.
+	
+	-->If in case there are no waiting threads or if all the waiting threads have low priority then the same thread will continue its execution.
+	
+Daemon Thread : 
+
+	-Daemon thread are known as background threads.
+	
+	-They provide service to other user defined threads.
+	
+	-If you want to make any thread as daemon thread, you can use setDaemon method for same.
+	
+	-Main thread cannot be made as background thread or daemon thread.It throws IllegalThreadStateException.
+	
+Thread Priority : 
+
+	-Priority means numbers of resources allocated to a particular thread.
+	
+	-JVM assigns the priority by-default.
+	
+	-The priority range lies between 1 and 10.
+	
+	-Three type of priority :-
+	
+		-Thread.MIN_PRIORITY (1)
+	
+		-Thread.NORM_PRIORITY (5)
+		
+		-Thread.MAX_PRIORITY (10)
+		
+Java Streams API :
+
+	-This concept is introduced in Java 8.
+	-This come with package java.util.Stream.
+	-This stream API has collection of classes, interfaces and enums to allow the function-style operations.
+	
+	
+Garbage Collections : 
+
+	-There are three stages in garbage collections :-
+	
+		:: Mark --> Garbage collector scan for the objects that contains no reference and which are eligible for removal from the memory.
+		
+		:: Sweep --> This objects are then removed from the heap memory.
+		
+		:: Compact --> Sweeps tends to leave many empty regions in the heap that causes memory fragmentation, so it basically helps to arrange the objects that helps in the allocation of new objects in sequence.
+
+
+Theroy Questions : 
+
+
+-Join in Thread.
+-Predicate , Filter.
+-Lambda Fucntion.
+-Java 11 & 8 Features.
+-Stream API.
+
+
+

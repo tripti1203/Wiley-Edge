@@ -1,0 +1,256 @@
+Java Database Connectivity :
+
+Persistency Approach -->
+
+File Handling ::
+ 	
+	--Data is not ralated
+	--searching mechanism is difficult,description of data.
+	
+XML ::
+
+	--<Employees><emp><empid>101</empid><empname>John</empname></emp></Employees>
+	
+DRIVER ::
+
+
+		Java Program -----> JDBC ----> DRIVER -----> Database
+		
+Driver is a software which acts as medium for communication between java program and database,using which database api is called
+
+Type 1 : ODBC Driver given by O. Used for prototyping.
+Type 2 : Native Driver (Provided By Organization)
+Type 3 : Network Driver 
+Type 4 : Vendor Specfic Driver (Provided By DB)
+
+
+JDBC API :: 
+
+	-DriverManager -> getConnection() 
+	
+	-Connection -> createStatement()
+	
+	-Statement -> 
+	
+		executeQuery() :- ResultSet (DQL : select)
+	
+		executeUpdate() :- int (DML : update,delete,insert)
+		
+		execute() :- boolean (DDL : create)
+	
+	-PreparedStatement -> 
+		
+		::it gives flexiblity to write query in variable format.
+	
+	-CallableStatement -> 
+		
+		::Used to invoke stored procedures
+	
+	-ResultSet -> 
+		
+		::gives the result of the executed query in tabular format.
+	
+	-ResultSetMetaData -> 
+		
+		::It gives information about resultSet
+		
+	-DatabseMetaData -> 
+		
+		::Gives information about database.
+		
+		::Connection gives the information about database.
+	
+-- Example 1 --
+public class Demo1 {
+	public static void main(String[] args){
+		//load the driver
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		//actualdatabaseconnectivity
+		String url = "jdbc:mysql://localhost:3306/demo1"; 
+		//validation
+		Connection con = DriverManager.getConnection(url,"root","root@123");
+		System.out.println("Connection Established !!");
+		Statement st = con.createStatement();
+		
+		ResultSet rs = st.executeQuery("SELECT * FROM Employees");
+		while(rs.next()){
+			//System.out.println(rs.getInt(1)+" , " + rs.getString(2) + " , " + rs.getString(3) );
+			System.out.println(rs.getInt(empId)+" , " + rs.getString('firstname') + " , " + rs.getString('lastname') );
+		}
+	}
+}
+
+NOTE : All the implementation of the methods present in the jdbc interfaces(createSatement,executeQuery) is returned by driver 
+
+Different exception that can be faced :
+
+	--Connection exception -> wrong port number
+	--SQLSyntaxErrorException -> when entered incorrect database name or query. 
+	
+--EXAMPLE 2--
+
+public class Demo1 {
+	public static void main(String[] args){
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		String url = "jdbc:mysql://localhost:3306/demo1"; 
+		Connection con = DriverManager.getConnection(url,"root","root@123");
+		System.out.println("Connection Established !!");
+		Statement st = con.createStatement();
+		
+		ResultSet rs = st.executeQuery("SELECT * FROM Employees");
+		while(rs.next()){
+			System.out.println(rs.getInt("empId")+" , " + rs.getString('empname') + " , " + rs.getString('empsalary') );
+		}
+		//Inserting values in the existing table 
+		String sqlInsert = "Insert into employees values(119,'Tripti',50000)"
+		int rowsAffected = st.exceuteUpdate(sqlInsert);
+		if(rowsAffected > 0){
+			System.out.println("Record inserted successfully!!");
+		}
+		else{
+			System.out.println("Record not inserted");
+		}
+		//Creating new table
+		String sqlCreate = "create table user(username text,password text)";
+		boolean status = st.execute(sqlCreate);
+		System.out.println(status);
+		System.out.println("Table Created");
+	}
+}
+
+Problem statement :: above code status printed is false but it should print true why??
+
+-- EXAMPLE 3 --
+
+public class Demo2 {
+	public static void main(String[] args){
+		Connection con = MyConnection.getConnection();
+		String sqlInsert = "insert into user values(?,?)"; //precompiledformat
+				
+		/*Pre-compiled format of the query is stored in the database through preparedStatement */
+		
+		PreparedStatement pt = con.preparedStatement(sqlInsert);
+			pt.setString(1,"abc");
+			pt.setString(2,"abc123");
+			
+			pt.executeUpdate();
+			
+			pt.clearParameter();
+			con.close();
+	}
+}
+
+-- Example 4 --
+
+public class Demo3 {
+	public static void main(String[] args){
+		Connection con = MyConnection.getConnection();
+		
+		CallableStatement callable = con.prepareCall("{call procedureName(?,?)}");
+		callable.setString(1,"abc");  //in parameter
+		cllable.registerOutParameter(2,java.sql.Types.VARCHAR);  //out parameter
+		callable.executeUpdate();
+		String res = callable.getString(2);
+		System.out.println("Result" + res);
+	}
+}
+
+-- Example 5 --
+
+public class Demo4 {
+	public static void main(String[] args){
+		Connection con = MyConnection.getConnection();
+		
+		Statement st = con.createSatement();
+		ResultSet rs = st.executeQuery("select * from emp");
+		ResultSetMetaData rsmetaData = rs.getMetaData();
+		System.out.println(rsmetaData.getColumnCount());
+		for(int i=1 ; i<=rsmetaData.getColumnCount();i++){
+			System.out.println(rsmetaData.getColumnName(i) + " " + 
+				rsmetaData.getColumnTypeName(i));
+		}
+		DatabseMetaData dbmetaData = con.getMetaData();
+		System.out.println(dbmetaData.getDriverMajaorVersion());
+		ResultSet rs1 = dbmetaData.getCatalogs();
+		while(rs1.next()){
+			System.out.println(rs1.getString(1));
+		}
+	}
+}
+
+-- Example 5 --
+
+public class Demo5 {
+	public static void main(String[] args){
+		Connection con = MyConnection.getConnection();
+		
+		Statement st = con.createSatement(ReaultSet.TYPE_SCROLL_SENSITIVE,ReaultSet.CONCUR_UPDATABLE);
+		ResultSet rs = st.executeQuery("select * from emp");
+		while(rs.next()){
+			sysout(rs.getInt(1) + " " + rs.getInt(2) + " " + rs.getInt(3));
+		}
+		while(rs.next()){
+			sysout(rs.getString(3));
+		}
+	}
+}
+
+:: SCROLLABLE RESULTSET :-
+
+	--Parameters in the statement.
+	
+	--ResultSet in forward as well as backward direction.
+	
+	--TYPE_SCROLL_INSENSITIVE / TYPE_SCROLL_SENSITIVE
+	
+	--AS resultSet is interface by default TYPE_SCROLL_SENSITIVE/TYPE_SCROLL_INSENSITIVE are public static final variable,hence it is directly accessed by resultSet.
+	
+Assignments : JDBC ROWSET,sqldump
+
+-- Example 6 --
+
+public class Demo6 {
+	public static void main(String[] args){
+		Connection con = MyConnection.getConnection();
+		PreparedStatement pt = con.preparedStatement("insert into emp values(?,?,?)");
+		
+		con.setAutoCommit(false);
+		pt.setInt(1,109);
+		pt.setString(2,"John");
+		pt.setInt(3,43000);
+		pt.addBatch();
+		
+		pt.setInt(1,110);
+		pt.setString(2,"Doe");
+		pt.setInt(3,33000);
+		pt.addBatch();
+		
+		pt.executeBatch();
+		sysout("Batch Updated Successfully !!");
+		
+		int[] result = pt.executeBatch();
+		for(int x : result){
+			sysout(x);
+		}
+		
+		con.commit();
+	}
+}
+
+:: BATCH UPDATE :-
+
+	- Executing more than one tracsanction at the same time.
+	
+	-If any exception happens in any one of the data in batch then the whole batch will throw exception and no changes will be made in the database.
+	
+	
+
+:: JDBC ROWSET :-
+
+	--RowSet facilitates a mechanism to keep the data in tabular form.
+	
+	--It happens to make the data more flexible as well as easier as compared to a ResultSet.
+	
+	--The connection between the data source and the RowSet object is maintained throughout its life cycle.
+	
+	--It is Scrollable and Updatable by default.

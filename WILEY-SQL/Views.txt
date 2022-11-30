@@ -1,0 +1,64 @@
+VIEWS :
+
+CREATE OR REPLACE VIEW view1 
+AS
+SELECT * FROM emp WHERE empSalary=8000;
+
+Insert in view : 
+
+--If the condition of view is satisfied then it will be inserted in the view as 
+well as in the base table.
+
+--The values are always inserted in the base table when inserting in views even if the condition satisfies for not.
+
+
+Restrict insertion in views & base table:
+
+--Using CASCADED CHECK OPTION we can restrict the values that are being inserted in the views as well as table;
+
+--If the values doesn't satisfies the condition of the views the value will not be stored in the base table and view table.
+
+SYNTAX:
+
+CREATE OR REPLACE VIEW view1 
+AS
+SELECT * FROM emp WHERE empSalary=8000
+WITH CASCADED CHECK OPTION;
+
+Simple View :
+
+--It contains single base table.
+
+--Insert,Update&Delete can be done in simple view.
+
+Complex View:
+
+--It can have more than 1 base table.
+
+--We cannot insert/delete in the complex views but can only update the values.
+
+Force Option in view :
+
+-- It creates the view even when the table doesn't exists.
+
+Materialised View:
+
+	--It is also like views but the result of the query will get stored in the table.
+	--It is used when the data is to be accessed frequently and data in table not getupdated on frequent basis.
+	-- Mysql Version 8 doesn't support materialized view.
+
+Syntax ::
+
+CREATE MATERIALIZED VIEW MV_Employee BUILD immediate
+REFRESH complete
+on commit SELECT * FROM Employee;
+
+	1.Build Immediate: Means materialized views(mv) created immediately.
+
+	2.Build Deferred: Means materialized views(mv) created after one refresh.
+
+	3.Refresh on commit:This option committed the data in materialized views in SQL immediately after data inserted and committed in table. This option is known as incremental refresh option. View is not fully refreshed with this option
+
+	4.Refresh on Demand:
+
+Using this option you can add the condition for refreshing data in materialized views.

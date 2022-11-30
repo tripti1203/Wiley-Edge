@@ -1,0 +1,31 @@
+Triggers :
+
+create Trigger before_employee_update
+	BEFORE UPDATE ON employees
+	FOR EACH ROW
+INSERT INTO employees_audit
+SET action = 'update',
+	employeeNumber = OLD.employeeNumber,
+	lastname = OLD.lastname,
+	changedate = NOW();
+	
+UPDATE employees SET lastname ='wagh' WHERE employeeNumber=2;
+SELECT * FROM employees;
+
+SELECT * FROM employees_audit;
+
+SHOW triggers;
+
+
+
+1)BEFORE Trigger  -> BEFORE UPDATE , BEFORE INSERT , BEFORE DELETE.
+2)AFTER TRIGGER -> AFTER UPDATE, AFTER INSERT , AFTER DELETE.
+
+WHERE DO USE BEFORE TRIGGER & AFTER TRIGGER ????
+
+-> The before statements help to check data and make changes before making commitments, whereas the after statements commit the data first and then execute statements
+
+Trigger Event	OLD		NEW
+INSERT			No		Yes
+UPDATE			Yes		Yes
+DELETE			Yes		No

@@ -1,0 +1,17 @@
+TESTING IN JAVA :
+
+1)Create another class for testing 
+2)the method that needs to be tested will contains @Test annotation
+3)Inside method - assertEquals();
+4)package- org.junit.*;
+
+public class TestCalculator{
+	public void testDiv(){
+		assertEquals("error in div",2,Calculator.div(10,5));
+		assertEquals("error in div",2,Calculator.div(10,7));
+	}
+	public void testAdd(){
+		assertEquals("error in div",30,Calculator.Add(10,20));
+		assertEquals("error in div",-10,Calculator.div(10,-20));
+	}
+}

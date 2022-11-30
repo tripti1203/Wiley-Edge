@@ -1,0 +1,226 @@
+-------------- SPRING (Version 5.0)----------------
+
+NOTE: In spring 6.0 java 17 is needed.
+
+-> Spring Framework is an open source application framework for the java platform.
+
+-> It aims to make J2EE development easier.
+
+-> Spring Framework is a semi structured framework which  means it provides basic structure and developers can customised it according to their need.
+
+Why Spring Framework ? 
+
+-> It is lightweight and minimally invasive development with plain old java objects (POJOs).
+
+-> Provides loose coupling through dependency injection and interface orientation.
+
+-> Declaravtive programming through aspects and common convention.
+
+-> Boilerplate reduction through aspects and templates.
+
+-> @lombok library -- getters & setters  
+
+Working of Spring ::
+
+-> Beans is an object that follow the dependency injection pattern.
+
+-> Whenever object is created in spring it is called beans.
+
+-> Dependencies are injected externally rather than programmaticaly.
+
+-> Beans have information on the classes depenedent on them.
+
+-> Beans define their own attributes within bean descriptor and also define the beans they depend on n the same descriptors.
+
+-> The bean does not need to locate and instantiate these classes using service locators called JNDI.
+
+NOTE : JNDI( Java Naming and Directory Interface)
+
+-> In a spring application, objects are created, wired together and live within the spring container.
+	
+	1. Beans factories - 
+	
+		--It is an implementation of factory Design Pattern 
+		(Responsible for creation and dispensing of beans).
+		
+		--Responsible for creation of many types of beans rather than a single type of bean.
+		
+		
+	2. Application context - 
+	
+		--To take full advantage of spring framework
+		
+		--Common implementation of application contetx are :
+			
+			::ClassPathXmLApplicationContext
+			::FileSystemApplicationContext
+			::XmlWebApplicationContext
+			
+			
+Bean And Its Configuration :
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+</beans> 
+       
+	
+NOTE : XML Files Provides data defination
+
+-- Example 1 :: 
+
+package com.beans;
+public class Employee{
+	private int empId;
+	private String empName;
+	private String empDept;
+}
+
+public class EmployeeApp{
+	public static void main(String[] args){
+		BeanFactory beanfactory = new XMLBeanFactory(new ClassPathResource("beans.xml");
+		System.out.println("BeanFactory is instantiated !!");
+		
+	}
+}
+
+-- Example 2 ::
+
+public class TestApplicationContext {
+	public static void main(String[] args) {
+		ApplicationContext appContext = new ClassPathXMLApplicationContext(""beans.xml);
+		System.out.println("ApplicationContext is instantiated !!");
+		
+		Employee e1 = (Employee)appContext.getBean("emp1");
+		e1.displayEmployee();
+		
+		Employee e2 = (Employee)appContext.getBean("emp2");
+		e1.displayEmployee();
+	}
+}
+
+emp.xml {
+
+	<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	<bean id="emp1" class="com.beans.Employee">
+		<property name = "empId" value="102"/>
+		<!-- push the value of empid to setEmpID (Setter Injection) -->
+		
+		<property name = "empName" values="Alan"/>
+		<!-- push the value of empName to setEmpName (Setter Injection)-->
+		
+		<property name = "empDept" value ="Technology"/>
+		<!-- push the value of empDept to setEmpDept (Setter Injection) -->
+	</bean>
+	
+	<bean id="emp2" class="com.beans.Employee">
+		<property name = "empID" value="103"/>
+		<property name = "empName" values="King"/>
+		<property name = "empDept" value ="Technology"/>
+	</bean>
+	
+</beans>
+}
+
+BeanFactory Vs ApplicationContext ::
+
+-- BeanFactory is lazy loaded (when required then loaded)
+
+-- ApplicationContext is eagerly loaded (automatically loaded)
+
+-- One descriptor file can be added in configuration with beanfactory.
+
+-- Multiple descriptor File can be added in configuration when using application context.
+
+-- Hence, applicationContext is much used by developers.
+
+
+Types Of Dependencies Injection :
+
+NOTE : DI and IOC go hand in hand 
+
+-- Setter Injections :: The injection is done via a setter method. IOC uses setter methods to get the dependent classes it needs.
+
+-- Getter Injections :: The injection is done via a getter method.
+
+-- Constructor Injections :: 
+
+	->IOC implementing class defining a constructor to get all its dependents.
+	
+	->Constructor injections can cause certain ambiguity.
+	
+	->To overcome ambiguity two helper utility are used "type" And "index".
+
+NOTE :: What happens when ids are duplicated at multiple location??
+
+--> The values will be overriden at the runtime,the last files values will be printed.
+
+--> Suppose we have three descriptor files emp.xml , emp2.xml , emp3.xml and all contains id emp1 with different sets of input. Then the values that will be printed is from emp3.xml files that is the last file added.
+
+
+-- Example 3 --
+
+Make customer class -> int cusId,String custName,Address custAddress
+Make Address class -> String buildingName ,String AreaName, String CityName
+
+Scopes of The Beans ::
+
+--To create multiple beans with different values but same id scopes are used.
+
+-- Default Scope is singleton.
+
+-- Prototype : Multiple beans are created based on the references.
+
+-- Request : objects are created per request.
+
+-- Session : Objects are created per session.
+
+<bean id="car" class="com.beans.Car" scope="prototype">
+.......
+</bean>
+
+-- Example 4 --
+
+Make car class -> int chasisno , String make , String color
+
+Life Cycle Of Bean :: 
+
+	--BeanNameAware Interfaces : setBeanName()
+	
+	--BeanFactoryAware Interfaces : setBeanFactory()
+	
+	--BeanPostProcessor : Doesn't have any abstract methods.
+	
+	--InitialisingBean Interface : afterPropertiesSet()
+	
+	--Disposable Interface : destroy()
+	
+	
+BeanNameAware (setBeanName) -> BeanFactoryAware (setBeanFactory) -> BeanPostProcessor(postProcessBeforeInitializing()) ->
+InitializingBean(afterPropertiesSet) -> custom init() method -> BeanPostProcessor(postProcessAfterInitializing()) -> Bean is ready -> bean closed(registerShutdownHook()) -> bean destroyed.
+
+AutoWiring ::
+
+	-Its a feature of spring that enables you to inject the dependency of an object implicitly using either setter injection or constructor injection.
+	
+	-It requires the less code because we dont need to write the code to inject the dependency explicitly.
+	
+	-Though autowiring is useful the programmer has no control over it.
+	
+	- Types of autowiring :- 
+		a) no 
+		
+		b) byName - when bean id name is same as property name then it can work.
+		
+		c) byType
+		
+		d) constructor
+		
+		f) autodetect - it is deprecated since spring 3.

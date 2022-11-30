@@ -1,0 +1,89 @@
+Difference between function & procedure :
+
+Function needs to return a value while procedure doesn't need to return a value.
+
+GetAllProducts in Mysql Workbench :
+
+SYNTAX: 
+
+CREATE DEFINER =`root`@`localhost` PROCEDURE `GetAllProducts`()
+BEGIN
+	SELECT * FROM Products where product_name='product1'
+END
+
+EXECUTING QUERY IN PROCEDURE:
+
+--call wiley.GetAllProducts();
+
+CHECK WHAT PROCEDURES EXISTS IN WORKBENCH :
+
+--SHOW PROCEDURE STATUS
+
+VARIABLE DECLARATION : 
+
+--It is done using DECLARE keyword
+Syntax :: DECLARE variableName Datatype DEFAULT 0;
+EXAMPLE:: DECLARE totalOrder INT DEFAULT 0;
+
+PARAMETERS :
+
+--IN 	 -> Pass argument to procedure
+--OUT 	 -> value out of procedure
+--INOUT  -> Pass the same variable which will return the value
+
+
+EXAMPLE USING IN PARAMETERS : 
+
+CREATE PROCEDURE `getProductName`(IN pname VARCHAR(255))           //Input
+BEGIN
+	SELECT * FROM product1
+	WHERE productName = pname;
+END
+
+EXECUTING :: call `getProductNAme`('Product1')    //Passing the value while executing the query
+
+EXAMPLE USING OUT PARAMETERS : 
+
+CREATE PROCEDURE `getProductName`(
+	IN pname VARCHAR(255)
+	OUT total INT
+)           
+BEGIN
+	SELECT count(*)                       //output of count will be stored in total
+	INTO total
+	FROM product1
+	WHERE productName = pname;
+END
+
+EXECUTING :: call `getProductNAme`('Product1',@total);
+			 SELECT @total;
+//Variable name need not to be same instead of total we can write @abc,@xyz etc.
+
+ASSIGNMENT -> OUT parameter can be used more than one value???
+
+EXAMPLE USING INOUT PARAMETERS : 
+
+CREATE PROCEDURE `SetCounter`(
+	INOUT counter INT,
+	IN inc INT
+)
+BEGIN
+	SET counter = counter + inc;
+END
+
+EXECUTING:: SET @counter = 11;
+			CALL SetCounter(@counter,1);
+			SELECT @counter as final_value;
+			
+Handling errors & cursors ??
+
+Exceptions In Mysql :
+
+--Error code for duplicate entry is 1062 
+--Error code for unknown column is 1052
+
+SYNTAX :: DECLARE action HANDLER condition... statement
+
+THere are different types of action -->
+	
+		*CONTINUE :
