@@ -1,0 +1,98 @@
+--- WEB APPLICATION ---
+
+New->Other->Web->DynamicWebProject
+
+--Web application are the application which are hosted on a server.
+
+--It contains varioud resource are available in webapp folder.
+
+-- Server -> Tomcat 9.0
+
+-- The result of java will be wrapped in html format and it will be generated on server.
+
+HTTP Methods ::
+
+	-- Get  : 
+		
+		> Use to get requests to retrieve resources.
+		
+		>It doesn't change the state of the resources.
+		
+		>Resource Found Response Code - 200(OK)
+		
+		>Not found Response Code - 404
+		
+	-- Post  :
+	
+		>To create new subordinate resources.
+		
+		>Resource Created - 201
+		
+		>Resources not Created - 200(OK) or 204(No Content)
+		
+	-- Put :
+	
+		>To update existing resources
+		
+		>Resources Created - 201
+		
+		>Resources Modified - 200(OK) or 204(No Content)
+	
+	-- Delete :
+	
+		> To delete resources
+		
+		> Deleted - 200(OK)
+		
+		>Action has been queued - 204(No content)
+		
+		>Resources not found - 404
+		
+	-- Trace
+	
+Web Application Vs Web Services ::
+
+-- Web application is an entire application where user communicates with different components of web applications.
+
+-- Web services are connected with the business logic i.e; how data are inserted and fetch.
+
+-- Web services doesn't give anything like presentation mode.
+
+-- Web should be able to generate data which are language independent and platform independent.
+
+NOTE : Consumer - use of web Services , consumes web services.
+
+-- Web Services like :- 
+
+	a) SOAP : Simple Object Access Protocol (XML Format)
+	b) REST : Representational State Transfer (JSON)
+
+REST API ::
+
+	*Component->Controller->RestController
+	
+	-@RestController : It has facilities to provide rest services.
+	
+	-RestTemplate is used to connect with the server.
+	
+NOTE : With @Controller @RequestMapping is used.
+	   With @RestController @GetMapping @PostMapping @PutMapping.
+	   
+-- Examples --
+
+-- @GetMapping("/users")
+	
+	public customer getCustomer(){
+	}
+
+-- @PostMapping("/users/a")
+	
+	public void addCustomer(Customer c){
+	}
+
+-- @DeleteMapping("/users/a")
+
+	public int deleteCustomer(Customer c){
+	}
+
+-- @PutMapping("/users/a")

@@ -1,0 +1,67 @@
+-- Spring Boot -- 
+
+-- Spring Boot makes it easy to create stand-alone production-grade Spring based Applications that you can "just run".
+
+-- Developed by Pivotal Team
+
+Features ::
+
+	--Embed Tomcat,Jetty or Undertow
+	
+	--Provide opinionated 'starter' dependencies to simplify your build configuration.
+	
+	--Automatically configures Spring and 3rd party libraries.
+	
+	--Absolutely no code generation and no requirement of xml configuration.
+	
+	--Provide production ready features such as metrics,health checks and externalized configuration.
+	
+New > Spring Starter Project > spring web
+
+Alternative - spring tool suite or marketplace in eclipse download spring starter project.
+
+@SpringBootApplication ::
+
+	-- It is a combination of @Configuration , @EnableAutoConfiguration, @ComponentScan.
+	
+	-- This annotation is used while setting up a spring boot project and mst be kept in the base package.
+	
+	--This annotation does component scan but it will only scan its subpackages.
+	
+Target Folder in Spring Boot Project ::
+
+	-- It is the deployement directory.
+	
+Pre-Defined Interfaces in Spring-Boot ::
+
+	--ApplicationRunner : run(ApplicationArguments args)
+	
+	--CommandLineRunner : run(String... args)
+	
+Use - Any code you want to use immediately when the application start can be put in this run method of applicationRunner or commandLineRunner.
+
+Application.Properties Files (In src/main/resources) ::
+
+	-- We can change our servers in this file or add any other type of properties in this file of the project.
+	
+	-- server.port = 8181
+	
+	-- spring.application.user = wiley1
+	
+	-- spring.application.name = sampleapp
+	
+Spring-Boot-Starters ::
+
+	-- Spring-Boot-Starters -> core starter,auto-configuration support logging and YAML.
+	
+	-- spring-boot-starter-jdbc -> Starter for using jdbc with hiakriPC connection pool.
+	
+	-- spring-boot-starter-data-jdbc -> starter for using spring data jdbc.
+	
+	--spring-boot-starter-data-jpa -> using psring data jpa with hibernate.
+	
+	-- spring-boot-starter-security -> using psring security.
+	
+	-- spring-boot-starter-web -> building web,restful application using spring MVC.Uses tomcat as the default embedded container.
+	
+	--spring-boot-starter-actuator -> it provides production ready features to help you monitor and manage your application.

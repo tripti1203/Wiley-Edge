@@ -224,3 +224,55 @@ AutoWiring ::
 		d) constructor
 		
 		f) autodetect - it is deprecated since spring 3.
+		
+Annotation :
+
+	--Annotation in framework is connected with some process at the background.
+	
+	--Stereotype Annotations : These are applied on classes.
+	
+	a) @Componenet : This indicates spring component.This will be scanned by the container and added into the application context.This annotation marks the java class as a componenet.
+	
+	b) @ Controller : It is used to indicate class is a spring controller which is able to handle the http requests e.g Spring MVC or Spring WebFlux.
+	
+	c) @Service : It is intended to be used in service layer.Such classes performs some service, such as execute business logic, perform calculations and call external APIs.
+	
+	d) @Repository : Used on java classes which directly access the database and fulfils the role of repository or data access object. It has automatic translation feature.
+	
+Annotaion used for Autowiring ::
+
+	a) @Autowired : This can be appled on fields,setters and constructor to inject object dependency implicitly. It default takes "byType".
+	
+	b) @Required : It is applied to setter methods of bean to enforce a reuired property.It indicates that the affected bean must be populated at configuration time otherwise an exception of type BeanInitializationException is thrown.
+	
+	c) @Qualifier : Used along with @autowire,when in the same application context more than one bean of the same type are avilable.
+	
+	d)@Cofiguration : This annotation is used on the classes which define beans.Java class annotated with @configuration is a configuration by itself and will have methods.
+	
+	e) @Bean :
+	
+-- Example 1 --
+
+@Configuration
+class MyConfiguration {
+	
+	@Bean
+	public Employee generateEmployee(){
+		return emp;
+	}
+}
+
+JDBC TEMPLATE ::
+
+jar files to be add - connector,spring.jdbc,tx 
+class JdbcTemplate{
+	DriverManagerDataSource drivaerManagerDataSource;
+}
+
+class DriverManagerDataSource{
+	String DriverclassNAme,url,password....
+}
+
+-- JdbcDAOSupport class contains JdbcTemplate as data member so instead of calling JdbcTemplate class and declaring variable we can extend JdbcDAOSupport class and setJdbcTemplate.
+
+-- NamedParameterJdbcTemplate class contains contructor argument to connect to database.Through hashmap values are stored in the database. (Spring-Demo7)
