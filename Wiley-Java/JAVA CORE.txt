@@ -720,14 +720,82 @@ Garbage Collections :
 		:: Compact --> Sweeps tends to leave many empty regions in the heap that causes memory fragmentation, so it basically helps to arrange the objects that helps in the allocation of new objects in sequence.
 
 
-Theroy Questions : 
+::FileNameFilter class in File Handling:-
 
+	accept() : It takes directory and filetype as an input.
+	
+::File Descriptor:-
 
--Join in Thread.
--Predicate , Filter.
--Lambda Fucntion.
--Java 11 & 8 Features.
--Stream API.
+	--
+	
+	
+:: Uisng BufferedReader to read the file :-
 
+	-Instead of reading character by character it will read the data in one run.
+	
+	-readLine() methods present in bufferedReader helps to achieve this.
+	
+Interview Questions :: 
 
+	-Read the contents of the file and convert it to arraylist?
+	-Create one file which will contain number from 1-10 and create another file to store the data of first file in reverse order?
+	-Join in Thread.
+	-Predicate , Filter.
+	-Lambda Fucntion.
+	-Java 11 & 8 Features.
+	-Stream API.
+	-Scanner class doesn't have checked exception concept?
+	
+Garbage Collection ::
+
+	Types of garbage collectors :-
+	
+	1. Serial Garbage Collector :
+	
+		--It is created for single threaded environment.
+		
+		--It block entire application and then this will find out which objects are not useful.
+		
+		--command to be given in run as configuration : java -XX:+UseSerialGC 
+
+	
+	2. Parallel Garbage Collector :
+	
+		--It uses multiple threads for garbage collection.
+		
+		--Because of this application will be faster,but due to multiple thread every now and then this collector will work whenever program is executed.
+	
+		--command to be given in run as configuration : java -XX:+UseParallelGC
+
+		--command for setting number of thread:-XX:ParallelGCThreads=<N>
+		
+	3. CMS Garbage collector :
+	
+		--This is vividly used.
+		
+		--It will scan the heap memory and check which are the object are elegible to be deleted(Marking).
+		
+		--Sweeping
+	
+	4. G1 Garbage Collection:
+	
+		--G1 means Garbage First.
+		
+		--Designed for multi process maching with large space.
+		
+		--Internally like CMS but apart from this it divides the JVM in partition instead of full scanning
+		
+		--Blocks(partition) are the continuous block and all are marked concurrently.
+		
+		--Once the marking phase is completed G1 knows which are the regions that can be free more easily.
+	
+	5. Epsilon Garbage Collector (Java11) :
+	
+		--It does not collect the object.
+	
+	6. Z Garbage Collector   (Java11) :
+	
+		--Specialized GC which works concurrently but it does not stop your application beyond 10ms.
+	
+	7. Shenondoah Garbage Collector (Java12 onwards) 
 

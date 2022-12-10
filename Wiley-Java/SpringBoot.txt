@@ -65,3 +65,12 @@ Spring-Boot-Starters ::
 	-- spring-boot-starter-web -> building web,restful application using spring MVC.Uses tomcat as the default embedded container.
 	
 	--spring-boot-starter-actuator -> it provides production ready features to help you monitor and manage your application.
+	
+Database Connectivity With Spring-Boot :: 
+
+	-- Spring Data JDBC & MYSQL DRIVER dependencies needed for connectivity.
+	
+	--Spring.datasource.url,spring.datsource.username,spring.datasource.password all these are done in application.properties file.
+	
+	
+	

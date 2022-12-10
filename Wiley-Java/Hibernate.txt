@@ -1,0 +1,101 @@
+-------------- Hibernate -------------
+
+Annotations in hibernate ::
+
+	--@ID: It indicates primary key of the current entity
+	
+	--@Column: Column name can be explicitly given.
+	
+	--@Entity: Table name can be explicitly given.
+	
+	--@GenerateValue(strategy=GenerationType.AUTO) : This strategy is just like auto-increment in mysql.
+	
+NOTE : 
+
+	--If entity name is not give then it will by default take the class name as the entity name.
+
+	--Similary, for @Column and @Id annotation if an explicit name is not given then it will take the variable name as the column name.
+	
+Hibernate + Spring ::
+
+	--DEMO--
+	
+@Configuration
+@EnableTransactionManagement
+public class HibernateConf {
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(
+          {"com.baeldung.hibernate.bootstrap.model" });
+        sessionFactory.setHibernateProperties(hibernateProperties());
+
+        return sessionFactory;
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("sa");
+
+        return dataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager hibernateTransactionManager() {
+        HibernateTransactionManager transactionManager
+          = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory().getObject());
+        return transactionManager;
+    }
+
+    private final Properties hibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty(
+          "hibernate.hbm2ddl.auto", "create-drop");
+        hibernateProperties.setProperty(
+          "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+
+        return hibernateProperties;
+    }
+}
+
+	
+	--LocalSessionFactoryBean : It is a factory bean that creates hibernate sessionFactory.This is the usual way to set up a shared Hibernate SessionFactory in a Spring application context
+	
+	--
+	
+	
+	
+	
+	
+	
+	
+NOTE:: 
+
+	--H2 database is given by spring internally to test your business logic.
+	
+	--Add dependency of h2 database.
+	/*
+	
+	spring.datasource.url=jdbc:h2:mem:jpadb
+	spring.datasource.driverClassName=org.h2.Driver
+	spring.datasource.username=sa
+	spring.datasource.password=mypass
+	spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+	spring.h2.console.enabled=true
+	
+	*/
+	
+	-- default username -> sa , password -> mypass
+	
+	
+
+@QUERY Annotations :: 
+
+--@Modifying And @Transactional For update query using @Query annotation.
